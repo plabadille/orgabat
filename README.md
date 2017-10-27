@@ -45,9 +45,27 @@ Le développement de cette application ce fera en deux phases avec deux équipes
 
 ​
 
-### Equipe de projet : Phase 2
+### Equipe de projet : Phase 2 (app + premier jeu)
 
-à définir
+  - Gestion de projet web : Pierre Labadille.
+
+  - Clients : Erwann Forestier et Mathieu Osmont.
+
+  - Developpeurs Backend : Evrard Caron (algorithmique), Lenaïc Couëllan (Responsable Symfony), Yoann Boyer (JS Fullstack), Logan Lepage (JS applicatif).
+  
+  - Graphiste : Manon Brouard
+
+​
+
+### Equipe de projet : Phase 3 (finalisation app + jeux)
+
+  - Gestion de projet web / Dev backend : Pierre Labadille.
+
+  - Clients : Erwann Forestier et Mathieu Osmont.
+
+  - Developpeurs Backend : Logan Lepage (JS applicatif), Paul Leménager (JS applicatif).
+  
+  - Graphiste + intégrateur : Lotfi Idir.
 
 ​
 
