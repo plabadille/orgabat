@@ -63,7 +63,7 @@ git checkout dev
 php composer.phar install
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
-php bin/console doctrine:database:load
+php bin/console doctrine:fixtures:load
 ```
 
 ### Installation jeux
@@ -72,6 +72,8 @@ php bin/console doctrine:database:load
 sudo apt-get install nodejs npm
 git submodule update --init
 cd ./web/modules/game
+git checkout master
+git pull
 npm install
 npm install -g webpack
 webpack -p
