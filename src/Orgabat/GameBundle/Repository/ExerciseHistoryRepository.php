@@ -10,4 +10,15 @@ namespace Orgabat\GameBundle\Repository;
  */
 class ExerciseHistoryRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getAllHistoryExercicesByUser($user) {
+        return $this->createQueryBuilder('eh')
+            ->where('eh.user = :user')
+            ->setParameter('user', $user)
+            ->addOrderBy('eh.date', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

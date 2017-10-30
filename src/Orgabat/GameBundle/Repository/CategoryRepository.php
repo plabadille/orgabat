@@ -9,7 +9,16 @@ namespace Orgabat\GameBundle\Repository;
  * repository methods below.
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
-{
+{   
+    /**
+    * Important note : because of some unknow error (maybe context issue) this doesn't work
+    * in PDFController. There's some random shuffle between exercisesHistory owner.
+    * This work fine when printing result for one user.
+    * For PDF we used instead ExerciseHistoryRepository::getAllHistoryExercicesByUser
+    *
+    * Debug has been done by comparing the result of the raw computed dql request (using ->getSql()) which work fine and the pdo request from below which is not fine.
+    *
+    */
     public function getExercisesOfAllCategoriesByUser($user)
     {
         return $this->createQueryBuilder('c')

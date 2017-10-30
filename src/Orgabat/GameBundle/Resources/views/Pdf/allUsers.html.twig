@@ -17,10 +17,10 @@
         .user-info {
             border: 1px solid black;
             padding: 8px;
-            text-align: center;
             margin-top: 20px;
         }
         .user-info p {
+            text-align: center;
             margin: 5px 0;
             padding: 0;
         }
@@ -55,22 +55,22 @@
     <h1 class="">Orgabat</h1>
     <h2 class="">Résultats des jeux</h2>
     {# User informations #}
-    {% for  key, user in users %}
+    {% for  key, exercisesHistoryByCategoriesAndUser in exercisesHistoryByCategoriesAndUsers %}
         <div class="user-info">
-            <p class="name">{{ user.lastName|upper }} {{ user.firstName }}</p>
-            <p class="birth">Né le : {{ user.formattedBirthDate|date("d/m/Y") }}</p>
-            {% if user.section %}
-                <p class="section">Inscrit en <span class="sectionName">{{ user.section.name }}</span></p>
+            <p class="name">{{ exercisesHistoryByCategoriesAndUser['apprentice'].lastName|upper }} {{ exercisesHistoryByCategoriesAndUser['apprentice'].firstName }}</p>
+            <p class="birth">Né le : {{ exercisesHistoryByCategoriesAndUser['apprentice'].formattedBirthDate|date("d/m/Y") }}</p>
+            {% if exercisesHistoryByCategoriesAndUser['apprentice'].section %}
+                <p class="section">Inscrit en <span class="sectionName">{{ exercisesHistoryByCategoriesAndUser['apprentice'].section.name }}</span></p>
             {% endif %}
         </div>
         {# If an apprentice didnt played #}
-        {% if categories[key] is empty %}
+        {% if exercisesHistoryByCategoriesAndUser['categories'] is empty %}
             <h3>Pas de données de jeu enregistrées.</h3>
         {% else %}
 
             {# Iterate all categories played by an apprentice #}
-            {% for category in categories[key]  %}
-                <h3 class=" titlePdf">{{ category.name }}</h3>
+            {% for category in exercisesHistoryByCategoriesAndUser['categories']  %}
+                <h3 class=" titlePdf">{{ category['category'].name }}</h3>
                 <table class="table-stats">
                     <thead>
                     <tr>
@@ -82,23 +82,23 @@
                     </tr>
                     </thead>
                     <tbody >
-                    {% for exercise in category.exercises|sort %}
+                    {% for exercise in category['exercises'] %}
                         <tr>
-                            <td>{{ exercise.name }}</td>
-                            <td>{{ exercise.bestExerciseHistory.timer }}</td>
-                            <td>{{ exercise.bestExerciseHistory.healthNote }} / {{ exercise.healthMaxNote }}</td>
-                            <td>{{ exercise.bestExerciseHistory.organizationNote }} / {{ exercise.organizationMaxNote }}</td>
-                            <td>{{ exercise.bestExerciseHistory.businessNotorietyNote }} / {{ exercise.businessNotorietyMaxNote }}</td>
+                            <td>{{ exercise['exercise'].name }}</td>
+                            <td>{{ exercise['exercise'].bestExerciseHistory.timer }}</td>
+                            <td>{{ exercise['exercise'].bestExerciseHistory.healthNote }} / {{ exercise['exercise'].healthMaxNote }}</td>
+                            <td>{{ exercise['exercise'].bestExerciseHistory.organizationNote }} / {{ exercise['exercise'].organizationMaxNote }}</td>
+                            <td>{{ exercise['exercise'].bestExerciseHistory.businessNotorietyNote }} / {{ exercise['exercise'].businessNotorietyMaxNote }}</td>
                         </tr>
                     {% endfor %}
 
                     {# Total stats for a category #}
                     <tr>
                         <td>Total</td>
-                        <td>{{ category.dataFromAllBestExercises.timer }}</td>
-                        <td>{{ category.dataFromAllBestExercises.healthNote }} / {{ stats.global.healthNote }}</td>
-                        <td>{{ category.dataFromAllBestExercises.organizationNote }} / {{ stats.global.organizationNote }}</td>
-                        <td>{{ category.dataFromAllBestExercises.businessNotorietyNote }} / {{ stats.global.businessNotorietyNote }}</td>
+                        <td>{{ category['category'].dataFromAllBestExercises.timer }}</td>
+                        <td>{{ category['category'].dataFromAllBestExercises.healthNote }} / {{ stats.global.healthNote }}</td>
+                        <td>{{ category['category'].dataFromAllBestExercises.organizationNote }} / {{ stats.global.organizationNote }}</td>
+                        <td>{{ category['category'].dataFromAllBestExercises.businessNotorietyNote }} / {{ stats.global.businessNotorietyNote }}</td>
                     </tr>
                     </tbody>
                 </table>
