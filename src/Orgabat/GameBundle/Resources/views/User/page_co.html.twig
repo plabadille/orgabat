@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <p><strong>Merci d'indiquer ton nom, ton prénom et ta classe... Puis de cliquer sur le bouton valider<strong><p>
+    {{  form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.lastname) }}
+    {{ form_row(form.password) }}
+
+    <button type="submit" class="btn btn-primary">Connexion</button>
+    {{  form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+{% endblock %}

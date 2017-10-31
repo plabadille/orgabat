@@ -1,0 +1,103 @@
+{% extends 'OrgabatGameBundle::base_listejeux.html.twig' %}
+{% block body %}
+  <div class="games">
+    <div class="row">
+      <div class="col-sm-9">
+          <h1 class="title">{{ category.name }}</h1>
+      </div>
+      <div class="col-sm-3 stats">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <p>Résumé :</p>
+                  <div class="progress health">
+                      <div class="progress-bar progress-bar-success" style="width:
+                        {{ (categStats['user']['healthNote'] / categStats['global']['healthNote'])*100 }}%"></div>
+                      <span class="stat">{{ categStats['user']['healthNote'] }} / {{ categStats['global']['healthNote'] }}</span>
+                  </div>
+                  <div class="progress organization">
+                      <div class="progress-bar progress-bar-info" style="width:
+                        {{ (categStats['user']['organizationNote'] / categStats['global']['organizationNote'])*100 }}%"></div>
+                      <span class="stat">{{ categStats['user']['organizationNote'] }} / {{ categStats['global']['organizationNote'] }}</span>
+                  </div>
+                  <div class="progress notoriety">
+                      <div class="progress-bar progress-bar-warning" style="width:
+                        {{ (categStats['user']['businessNotorietyNote'] / categStats['global']['businessNotorietyNote'])*100 }}%"></div>
+                      <span class="stat">{{ categStats['user']['businessNotorietyNote'] }} / {{ categStats['global']['businessNotorietyNote'] }}</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="row modules is-flex">
+      {% for exercise in exercises %}
+          <div class="col-sm-4 game noselect {{ exercise.finished ? 'disabled' : '' }}" data-game-id="{{ exercise.code }}">
+            <div class="content">
+              <div class="panel-heading">
+                  <h2 class="game_label">{{ exercise.name }}</h2>
+              </div>
+              <div class="panel-body">
+                  <div class="infos">
+                    <h4>
+                      {% if exercise.bestExerciseHistory %}
+                        {% if exercise.finished %}
+                            <span>Jeu terminé</span>
+                        {% else %}
+                            <div>Meilleur score: {{ exercise.bestExerciseHistory.humanScore }} / {{ exercise.maxScore }}</div>
+                            <h5 class="requiredScore">Score minimum requis: {{ exercise.minScore }} / {{ exercise.maxScore }}</h5>
+                        {% endif %}
+                      {% else %}
+                          <span>Essaie-le !</span>
+                      {% endif %}
+                    </h4>
+                    <p>{{ exercise.description }}</p>
+                  </div>
+                  <div class="progresses">
+                    {% if exercise.bestExerciseHistory %}
+                      <div class="tries">Tentatives: {{ exercise.exerciseHistories|length }}</div>
+                      <div class="progress health">
+                          <div class="progress-bar progress-bar-success" style="width:
+                            {{ (exercise.bestExerciseHistory.healthNote / exercise.healthMaxNote)*100 }}%"></div>
+                          <span class="stat">{{ exercise.bestExerciseHistory.healthNote }} / {{ exercise.healthMaxNote }}</span>
+                      </div>
+                      <div class="progress organization">
+                          <div class="progress-bar progress-bar-info" style="width:
+                            {{ (exercise.bestExerciseHistory.organizationNote / exercise.organizationMaxNote)*100 }}%"></div>
+                          <span class="stat">{{ exercise.bestExerciseHistory.organizationNote }} / {{ exercise.organizationMaxNote }}</span>
+                      </div>
+                      <div class="progress notoriety">
+                          <div class="progress-bar progress-bar-warning" style="width:
+                            {{ (exercise.bestExerciseHistory.businessNotorietyNote / exercise.businessNotorietyMaxNote)*100 }}%"></div>
+                          <span class="stat">{{ exercise.bestExerciseHistory.businessNotorietyNote }} / {{ exercise.businessNotorietyMaxNote }}</span>
+                      </div>
+                    {% else %}
+                      <div class="progress health">
+                          <div class="progress-bar progress-bar-success" style="width:
+                            {{ (0 / exercise.healthMaxNote)*100 }}%"></div>
+                          <span class="stat">{{ 0 }} / {{ exercise.healthMaxNote }}</span>
+                      </div>
+                      <div class="progress organization">
+                          <div class="progress-bar progress-bar-info" style="width:
+                            {{ (0 / exercise.organizationMaxNote)*100 }}%"></div>
+                          <span class="stat">{{ 0 }} / {{ exercise.organizationMaxNote }}</span>
+                      </div>
+                      <div class="progress notoriety">
+                          <div class="progress-bar progress-bar-warning" style="width:
+                            {{ (0 / exercise.businessNotorietyMaxNote)*100 }}%"></div>
+                          <span class="stat">{{ 0 }} / {{ exercise.businessNotorietyMaxNote }}</span>
+                      </div>
+                    {% endif %}
+                  </div>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+
+    <a href="{{ path('default_category') }}" class="col-sm-12 btn btn-success" role="button" id="return">Retourner aux modules</a>
+  </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/exercices.js') }}"></script>
+{% endblock %}

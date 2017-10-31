@@ -1,5 +1,3 @@
-
-
 # Projet ORGABAT
 
 
@@ -157,4 +155,5 @@ Partenaires
 
 * OPP BTP
 
-   [jQuery]: <http://jquery.com>
+
+A Symfony project created on May 23, 2016, 3:15 pm.

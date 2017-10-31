@@ -1,0 +1,90 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <!-- Modal d'une catégorie -->
+    <div class="modal fade bs-example-modal-lg" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="categoryModalLabel">Chargement...</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe src="" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal d'un jeu -->
+    <!-- TODO: Split de l'affichage -->
+    <div class="modal fade bs-example-modal-lg" id="gameModal" tabindex="-1" role="dialog" aria-labelledby="gameModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="gameModalLabel">Chargement du jeu...</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe src="" width="100%" height="100%"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liste des catégories -->
+    <div class="col-sm-9">
+        {% for category in categories %}
+            <div class="col-sm-3 panel panel-default panel-body rubrique" data-category-id="{{ category.id }}">
+                <p class="panel-body-p" id="category_title">{{ category.name }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Info -->
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>Nombre de mini-jeux terminés:</p>
+                <div class="progress">
+                  <div class="progress-bar" style="width:
+                    {{ (minigames['finished'] / minigames['total'])*100 }}%"></div>
+                  <span class="stat">{{ minigames['finished'] }} / {{ minigames['total'] }}</span>
+                </div>
+                <hr>
+                <p>Santé</p>
+                <div class="progress health">
+                    <div class="progress-bar progress-bar-success" style="width:
+                      {{ (stats['user']['healthNote'] / stats['global']['healthNote'])*100 }}%"></div>
+                    <span class="stat">{{ stats['user']['healthNote'] }} / {{ stats['global']['healthNote'] }}</span>
+                </div>
+                <p>Organisation</p>
+                <div class="progress organization">
+                    <div class="progress-bar progress-bar-info" style="width:
+                      {{ (stats['user']['organizationNote'] / stats['global']['organizationNote'])*100 }}%"></div>
+                    <span class="stat">{{ stats['user']['organizationNote'] }} / {{ stats['global']['organizationNote'] }}</span>
+                </div>
+                <p>Notoriété de l'entreprise</p>
+                <div class="progress notoriety">
+                    <div class="progress-bar progress-bar-warning" style="width:
+                      {{ (stats['user']['businessNotorietyNote'] / stats['global']['businessNotorietyNote'])*100 }}%"></div>
+                    <span class="stat">{{ stats['user']['businessNotorietyNote'] }} / {{ stats['global']['businessNotorietyNote'] }}</span>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a class="btn btn-info text-center" href="{{ path('user_get_infos_pdf') }}"><i class="fa fa-download"></i> Statistiques</a>
+            </div>
+        </div>
+        <div class="logout_wrapper">
+          <a class="btn btn-danger" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/rubriques.js') }}"></script>
+{% endblock %}

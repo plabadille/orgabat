@@ -1,3 +1,39 @@
+orgabat_game:
+    resource: "@OrgabatGameBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@OrgabatGameBundle/Controller/"
     type:     annotation
+
+root:
+    path: /login
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /connexion
+        permanent: true
+profil:
+    path: /profil/
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /connexion
+        permanent: true
+
+fos_user_security:
+    resource: "@OrgabatGameBundle/Resources/config/security.xml"
+
+fos_user_profile:
+   resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+   prefix: /profil
+
+fos_user_register:
+   resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+   prefix: /inscription
+
+fos_user_resetting:
+   resource: "@OrgabatGameBundle/Resources/config/resetting.xml"
+   prefix: /reinitialisation
+
+fos_user_change_password:
+   resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+   prefix: /profil

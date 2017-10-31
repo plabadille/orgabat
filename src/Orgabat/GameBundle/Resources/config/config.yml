@@ -1,0 +1,40 @@
+pugx_multi_user:
+    users:
+        apprentice:
+            entity: 
+                class: Orgabat\GameBundle\Entity\Apprentice
+            # registration:
+            #     form: 
+            #         type: Acme\UserBundle\Form\Type\RegistrationUserOneFormType
+            #         name: fos_user_registration_form
+            #         validation_groups:  [Registration, Default]
+            #     template: AcmeUserBundle:Registration:user_one.form.html.twig
+            # profile:
+            #     form:
+            #         type: Acme\UserBundle\Form\Type\ProfileUserOneFormType
+            #         name: fos_user_profile_form
+            #         validation_groups:  [Profile, Default]
+        trainer:
+                    entity:
+                        class: Orgabat\GameBundle\Entity\Trainer
+                    # registration:
+                    #     form:
+                    #         type: Acme\UserBundle\Form\Type\RegistrationUserOneFormType
+                    #         name: fos_user_registration_form
+                    #         validation_groups:  [Registration, Default]
+                    #     template: AcmeUserBundle:Registration:user_one.form.html.twig
+                    # profile:
+                    #     form:
+                    #         type: Acme\UserBundle\Form\Type\ProfileUserOneFormType
+                    #         name: fos_user_profile_form
+                    #         validation_groups:  [Profile, Default]
+        admin:
+            entity: 
+                class: Orgabat\GameBundle\Entity\Admin
+            # registration:
+            #     form: 
+            #         type: Acme\UserBundle\Form\Type\RegistrationUserTwoFormType
+            #     template: AcmeUserBundle:Registration:user_two.form.html.twig
+            # profile:
+            #     form: 
+            #         type: Acme\UserBundle\Form\Type\ProfileUserTwoFormType

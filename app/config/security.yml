@@ -1,24 +1,44 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    role_hierarchy:
+        ROLE_APPRENTICE: ROLE_USER
+        ROLE_TRAINER:  ROLE_APPRENTICE
+        ROLE_ADMIN:       ROLE_TRAINER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
         main:
-            anonymous: ~
-            # activate different ways to authenticate
+            pattern: ^/
+            form_login:
+                success_handler: orgabat.security.login_handler
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+            logout:
+                path: /deconnexion
+                target: /
+            anonymous:    true
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    access_control:
+        - { path: ^/$, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/rubriques, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/connexion$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/classes$, role: ROLE_TRAINER }
+        - { path: ^/admin/modifier_infos$, role: ROLE_TRAINER }
+        - { path: ^/admin/classe$, role: ROLE_TRAINER }
+        - { path: ^/admin/apprentis, role: ROLE_TRAINER }
+        - { path: ^/admin/apprenti, role: ROLE_TRAINER }
+        - { path: ^/admin/apprentis/statistiques, role: ROLE_TRAINER }
+        - { path: ^/admin/formateurs$, role: ROLE_ADMIN }
+        - { path: ^/admin/apprentis/exporter, role: ROLE_ADMIN }
+        - { path: ^/admin/apprentis/importer, role: ROLE_ADMIN }
+        - { path: ^/admin/formateurs/exporter, role: ROLE_ADMIN }
+        - { path: ^/admin/formateurs/importer, role: ROLE_ADMIN }
+        - { path: ^/admin/classes/exporter, role: ROLE_ADMIN }
+        - { path: ^/admin/classes/importer, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_TRAINER }
