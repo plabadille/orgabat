@@ -13,7 +13,7 @@ class LoadExerciseData implements FixtureInterface, OrderedFixtureInterface
     {
         $data = [
             // Jeu test : [ 'Jeu 1', 'Approvisionnement', 3, 4, 2, 1, '' ],
-            [ 'Jeu 1B', 4, 'Approvisionnement', 5, 4, 1, 'toto' ],
+            [ 'Jeu 1B', 4, 'Approvisionnement', 5, 4, 1, 'Choisir les différents matériaux, matériels et équipements de protection pour la réalisation d\'un mur en agglo de 20 en retour d\'angle.' ],
             [ 'Jeu 2B', 11, 'Approvisionnement', 1, 1, 7, 'Contrôler l\'ensemble de la marchandise à l\'aide du bon de livraison donné par le chauffeur.' ],
             [ 'Jeu 3B', 19, 'Approvisionnement', 8, 4, 8, 'Amener la palette d\'agglos, le sable et le gravier au bon endroit sur le chantier.' ],
             [ 'Jeu 1C', 7, 'Déplacements', 3, 4, 7, 'Cliquer sur les différentes cartes et retrouver celles qui sont identiques.' ],
