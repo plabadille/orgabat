@@ -38,10 +38,10 @@ apigame_score:
 # GameController
 
 game_game:
-    path:     /jeu/{id}
+    path:     /jeu/{code}
     defaults: { _controller: OrgabatGameBundle:Game:game }
     requirements:
-        id:   \d+
+        code:   \d+
 
 # AdminController
 

@@ -40,7 +40,7 @@ class APIGameController extends Controller
                     $user = $this->get('security.token_storage')->getToken()->getUser();
                     $em = $this->getDoctrine()->getManager();
                     $exercise = $em->getRepository('OrgabatGameBundle:Exercise')
-                        ->find($data['exerciseId']);
+                        ->findOneByCode($data['exerciseId']);
 
                     // Create the new attempt
                     $exerciseHistory = new ExerciseHistory();
