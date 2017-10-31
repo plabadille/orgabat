@@ -79,6 +79,20 @@ class Exercise
     private $exerciseHistories;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="code", type="integer")
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, unique=false)
+     */
+    private $description;
+
+    /**
      * Get id.
      *
      * @return int
@@ -86,6 +100,30 @@ class Exercise
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get code.
+     *
+     * @return int
+     */
+    public function getCode() 
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set code.
+     *
+     * @param int $code
+     *
+     * @return Exercise
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
     /**
@@ -110,6 +148,30 @@ class Exercise
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set description.
+     *
+     * @param string $description
+     *
+     * @return Exercise
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**

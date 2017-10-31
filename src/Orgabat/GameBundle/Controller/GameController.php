@@ -9,10 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class GameController extends Controller
 {
-    public function gameAction(Request $request, $id)
+    public function gameAction(Request $request, $code)
     {
         return $this->render('OrgabatGameBundle:Game:page_jeu.html.twig', [
-            'id' => $id
+            'id' => $code
         ]);
     }
 }

@@ -15,9 +15,9 @@ class LoadCategoryData implements FixtureInterface, OrderedFixtureInterface
             'Approvisionnement',
             'Déplacements',
             'Circulation',
-            'Manutention',
+            'Manutention et postures au travail',
             'Protection',
-            'Organisation',
+            'Repli de chantier',
             "Gestion de l'espace de travail",
             'Communication'
         ];

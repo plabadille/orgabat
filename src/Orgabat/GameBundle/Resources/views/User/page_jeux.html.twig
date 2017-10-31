@@ -30,7 +30,7 @@
     </div>
     <div class="row modules is-flex">
       {% for exercise in exercises %}
-          <div class="col-sm-4 game noselect {{ exercise.finished ? 'disabled' : '' }}" data-game-id="{{ exercise.id }}">
+          <div class="col-sm-4 game noselect {{ exercise.finished ? 'disabled' : '' }}" data-game-id="{{ exercise.code }}">
             <div class="content">
               <div class="panel-heading">
                   <h2 class="game_label">{{ exercise.name }}</h2>
@@ -49,7 +49,7 @@
                           <span>Essaie-le !</span>
                       {% endif %}
                     </h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>{{ exercise.description }}</p>
                   </div>
                   <div class="progresses">
                     {% if exercise.bestExerciseHistory %}
