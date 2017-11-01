@@ -72,4 +72,9 @@
       keyboard: false
     });
   };
+
+  window.closeGameModal = function() {
+    $('#gameModal').modal('hide');
+  };
+
 })(window);
