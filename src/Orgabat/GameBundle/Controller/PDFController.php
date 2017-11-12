@@ -177,7 +177,7 @@ class PDFController extends Controller
      *
      * @return Response : pdf file
      */
-    private function generatePdfFile(String $filename, String $html) {
+    private function generatePdfFile($filename, $html) {
         $html2pdf = $this->get('html2pdf_factory')->create();
         $html2pdf->pdf->SetDisplayMode('real');
         $html2pdf->writeHTML($html);
