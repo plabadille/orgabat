@@ -2,6 +2,9 @@
 
 namespace Orgabat\GameBundle\Repository;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Orgabat\GameBundle\Entity\Apprentice;
+
 /**
  * CategoryRepository.
  *
@@ -11,27 +14,42 @@ namespace Orgabat\GameBundle\Repository;
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {   
     /**
-    * Important note : because of some unknow error (maybe context issue) this doesn't work
-    * in PDFController. There's some random shuffle between exercisesHistory owner.
-    * This work fine when printing result for one user.
-    * For PDF we used instead ExerciseHistoryRepository::getAllHistoryExercicesByUser
+    * Important note : because of some unknow error (maybe context issue) this doesn't work for multiple user, please use the array version below.
     *
-    * Debug has been done by comparing the result of the raw computed dql request (using ->getSql()) which work fine and the pdo request from below which is not fine.
-    *
+    * @ParamConverter("apprentice", options={"mapping": {"apprentice_id": "id"}})
     */
-    public function getExercisesOfAllCategoriesByUser($user)
+    public function getExercisesOfAllCategoriesByUser(Apprentice $apprentice)
     {
         return $this->createQueryBuilder('c')
             ->join('c.exercises', 'e')
             ->addSelect('e')
             ->join('e.exerciseHistories', 'eh', 'WITH', 'eh.user = :user')
-            ->setParameter('user', $user)
+            ->setParameter('user', $apprentice)
             ->addSelect('eh')
             ->addOrderBy('c.id', 'ASC')
             ->addOrderBy('e.id', 'ASC')
             ->addOrderBy('eh.date', 'DESC')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+    * @ParamConverter("apprentice", options={"mapping": {"apprentice_id": "id"}})
+    */
+    public function getExercisesOfAllCategoriesByUserArray(Apprentice $apprentice)
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.exercises', 'e')
+            ->addSelect('e')
+            ->join('e.exerciseHistories', 'eh', 'WITH', 'eh.user = :user')
+            ->setParameter('user', $apprentice)
+            ->addSelect('eh')
+            ->addOrderBy('c.id', 'ASC')
+            ->addOrderBy('e.id', 'ASC')
+            ->addOrderBy('eh.date', 'DESC')
+            ->getQuery()
+            ->getArrayResult()
         ;
     }
 }

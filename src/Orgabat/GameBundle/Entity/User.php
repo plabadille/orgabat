@@ -95,4 +95,9 @@ abstract class User extends BaseUser
         return $this->getFirstName(). ' ' . $this->getLastName();
     }
 
+    public function getSluggedFullName() {
+        return $this->getFirstName() . $this->getLastName();
+    }
+
+
 }

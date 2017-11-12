@@ -17,10 +17,10 @@
         .user-info {
             border: 1px solid black;
             padding: 8px;
+            text-align: center;
             margin-top: 20px;
         }
         .user-info p {
-            text-align: center;
             margin: 5px 0;
             padding: 0;
         }
@@ -55,22 +55,24 @@
     <h1 class="">Orgabat</h1>
     <h2 class="">Résultats des jeux</h2>
     {# User informations #}
-    {% for  key, exercisesHistoryByCategoriesAndUser in exercisesHistoryByCategoriesAndUsers %}
+    {% for userData in dataByUsers %}
         <div class="user-info">
-            <p class="name">{{ exercisesHistoryByCategoriesAndUser['apprentice'].lastName|upper }} {{ exercisesHistoryByCategoriesAndUser['apprentice'].firstName }}</p>
-            <p class="birth">Né le : {{ exercisesHistoryByCategoriesAndUser['apprentice'].formattedBirthDate|date("d/m/Y") }}</p>
-            {% if exercisesHistoryByCategoriesAndUser['apprentice'].section %}
-                <p class="section">Inscrit en <span class="sectionName">{{ exercisesHistoryByCategoriesAndUser['apprentice'].section.name }}</span></p>
+            <p class="name">{{ userData['user'].lastName|upper }} {{ userData['user'].firstName }}</p>
+            {% if userData['user'].roles[0] == "ROLE_APPRENTICE" %}
+                <p class="birth">Né le : {{ userData['user'].formattedBirthDate|date("d/m/Y") }}</p>
+                {% if userData['user'].section %}
+                    <p class="section">Inscrit en <span class="sectionName">{{ userData['user'].section.name }}</span></p>
+                {% endif %}
             {% endif %}
         </div>
+
         {# If an apprentice didnt played #}
-        {% if exercisesHistoryByCategoriesAndUser['categories'] is empty %}
+        {% if userData['categories'] is empty %}
             <h3>Pas de données de jeu enregistrées.</h3>
         {% else %}
-
             {# Iterate all categories played by an apprentice #}
-            {% for category in exercisesHistoryByCategoriesAndUser['categories']  %}
-                <h3 class=" titlePdf">{{ category['category'].name }}</h3>
+            {% for category in userData['categories']  %}
+                <h3 class=" titlePdf">{{ category.name }}</h3>
                 <table class="table-stats">
                     <thead>
                     <tr>
@@ -79,26 +81,29 @@
                         <th>Santé</th>
                         <th>Organisation</th>
                         <th>Notoriété de l'entreprise</th>
+                        <th>Tentatives</th>
                     </tr>
                     </thead>
                     <tbody >
-                    {% for exercise in category['exercises'] %}
+                    {% for exercise in category.exercises %}
                         <tr>
-                            <td>{{ exercise['exercise'].name }}</td>
-                            <td>{{ exercise['exercise'].bestExerciseHistory.timer }}</td>
-                            <td>{{ exercise['exercise'].bestExerciseHistory.healthNote }} / {{ exercise['exercise'].healthMaxNote }}</td>
-                            <td>{{ exercise['exercise'].bestExerciseHistory.organizationNote }} / {{ exercise['exercise'].organizationMaxNote }}</td>
-                            <td>{{ exercise['exercise'].bestExerciseHistory.businessNotorietyNote }} / {{ exercise['exercise'].businessNotorietyMaxNote }}</td>
+                            <td>{{ exercise.name }}</td>
+                            <td>{{ exercise.bestAttempt.timer }}</td>
+                            <td>{{ exercise.bestAttempt.healthNote }} / {{ exercise.healthMaxNote }}</td>
+                            <td>{{ exercise.bestAttempt.organizationNote }} / {{ exercise.organizationMaxNote }}</td>
+                            <td>{{ exercise.bestAttempt.businessNotorietyNote }} / {{ exercise.businessNotorietyMaxNote }}</td>
+                            <td>{{ exercise.bestAttempt.attemptCount }}</td>
                         </tr>
                     {% endfor %}
 
                     {# Total stats for a category #}
                     <tr>
                         <td>Total</td>
-                        <td>{{ category['category'].dataFromAllBestExercises.timer }}</td>
-                        <td>{{ category['category'].dataFromAllBestExercises.healthNote }} / {{ stats.global.healthNote }}</td>
-                        <td>{{ category['category'].dataFromAllBestExercises.organizationNote }} / {{ stats.global.organizationNote }}</td>
-                        <td>{{ category['category'].dataFromAllBestExercises.businessNotorietyNote }} / {{ stats.global.businessNotorietyNote }}</td>
+                        <td>{{ category.globalGameStatistics.timer }}</td>
+                        <td>{{ category.globalGameStatistics.healthNote }} / {{ category.globalGameStatistics.healthMaxNote }}</td>
+                        <td>{{ category.globalGameStatistics.organizationNote }} / {{ category.globalGameStatistics.organizationMaxNote }}</td>
+                        <td>{{ category.globalGameStatistics.businessNotorietyNote }} / {{ category.globalGameStatistics.businessNotorietyMaxNote }}</td>
+                        <td>{{ category.globalGameStatistics.attemptCount }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -108,5 +113,3 @@
 </div>
 </body>
 </html>
-
-

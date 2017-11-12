@@ -80,26 +80,29 @@
                     <th>Santé</th>
                     <th>Organisation</th>
                     <th>Notoriété de l'entreprise</th>
+                    <th>Tentatives</th>
                 </tr>
                 </thead>
                 <tbody >
-                {% for exercise in category.exercises|sort %}
+                {% for exercise in category.exercises %}
                     <tr>
                         <td>{{ exercise.name }}</td>
-                        <td>{{ exercise.bestExerciseHistory.timer }}</td>
-                        <td>{{ exercise.bestExerciseHistory.healthNote }} / {{ exercise.healthMaxNote }}</td>
-                        <td>{{ exercise.bestExerciseHistory.organizationNote }} / {{ exercise.organizationMaxNote }}</td>
-                        <td>{{ exercise.bestExerciseHistory.businessNotorietyNote }} / {{ exercise.businessNotorietyMaxNote }}</td>
+                        <td>{{ exercise.bestAttempt.timer }}</td>
+                        <td>{{ exercise.bestAttempt.healthNote }} / {{ exercise.healthMaxNote }}</td>
+                        <td>{{ exercise.bestAttempt.organizationNote }} / {{ exercise.organizationMaxNote }}</td>
+                        <td>{{ exercise.bestAttempt.businessNotorietyNote }} / {{ exercise.businessNotorietyMaxNote }}</td>
+                        <td>{{ exercise.bestAttempt.attemptCount }}</td>
                     </tr>
                 {% endfor %}
 
                 {# Total stats for a category #}
                 <tr>
                     <td>Total</td>
-                    <td>{{ category.dataFromAllBestExercises.timer }}</td>
-                    <td>{{ category.dataFromAllBestExercises.healthNote }} / {{ category.maxResults.healthMaxNote }}</td>
-                    <td>{{ category.dataFromAllBestExercises.organizationNote }} / {{ category.maxResults.organizationMaxNote }}</td>
-                    <td>{{ category.dataFromAllBestExercises.businessNotorietyNote }} / {{ category.maxResults.businessNotorietyMaxNote }}</td>
+                    <td>{{ category.globalGameStatistics.timer }}</td>
+                    <td>{{ category.globalGameStatistics.healthNote }} / {{ category.globalGameStatistics.healthMaxNote }}</td>
+                    <td>{{ category.globalGameStatistics.organizationNote }} / {{ category.globalGameStatistics.organizationMaxNote }}</td>
+                    <td>{{ category.globalGameStatistics.businessNotorietyNote }} / {{ category.globalGameStatistics.businessNotorietyMaxNote }}</td>
+                    <td>{{ category.globalGameStatistics.attemptCount }}</td>
                 </tr>
                 </tbody>
             </table>
