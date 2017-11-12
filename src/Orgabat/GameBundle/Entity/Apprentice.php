@@ -82,7 +82,7 @@ class Apprentice extends User
         $year = substr($this->birthDate,4,4);
 
         $fullDate = $year . '-' . $month . '-' . $day . " 00:00:00";
-        return new \DateTime($fullDate);
+        return new DateTime($fullDate);
     }
 
     /**
