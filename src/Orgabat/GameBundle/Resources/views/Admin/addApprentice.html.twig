@@ -1,12 +1,16 @@
 {% extends '::base_dashboard.html.twig' %}
 {% block body %}
-
     <h3 class="text-center">Ajouter un apprenti</h3>
     {{  form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_errors(form.email) }}
+    {{ form_errors(form.birthdate) }}
     <div class="col-sm-12">{{ form_row(form.firstName) }}</div>
     <div class="col-sm-12">{{ form_row(form.lastName) }}</div>
     <div class="col-sm-12">{{ form_row(form.email) }}</div>
-    <div class="col-sm-12">{{ form_row(form.birthdate) }}</div>
+    <div class="col-sm-12">{{ form_row(form.birthdate, {
+        'errors': form_errors(form.birthdate)
+    }) }}</div>
     <div class="col-sm-12">{{ form_row(form.section) }}</div>
 
     <div>

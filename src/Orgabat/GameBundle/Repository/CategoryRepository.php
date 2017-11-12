@@ -16,9 +16,8 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
     /**
     * Important note : because of some unknow error (maybe context issue) this doesn't work for multiple user, please use the array version below.
     *
-    * @ParamConverter("apprentice", options={"mapping": {"apprentice_id": "id"}})
     */
-    public function getExercisesOfAllCategoriesByUser(Apprentice $apprentice)
+    public function getExercisesOfAllCategoriesByUser($apprentice)
     {
         return $this->createQueryBuilder('c')
             ->join('c.exercises', 'e')
