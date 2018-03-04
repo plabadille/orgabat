@@ -48,9 +48,9 @@ class APIGameController extends Controller
                         ->setUser($user)
                         ->setExercise($exercise)
                         ->setTimer($data['time'])
-                        ->setHealthNote($data['health'])
-                        ->setOrganizationNote($data['organization'])
-                        ->setBusinessNotorietyNote($data['business']);
+                        ->setHealthNote(abs($data['health']))
+                        ->setOrganizationNote(abs($data['organization']))
+                        ->setBusinessNotorietyNote(abs($data['business']));
 
                     // Save in DB
                     $em->persist($exerciseHistory);
