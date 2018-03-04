@@ -58,19 +58,19 @@
                 <p>Santé</p>
                 <div class="progress health">
                     <div class="progress-bar progress-bar-success" style="width:
-                      {{ (stats['user']['healthNote'] / stats['global']['healthNote'])*100 }}%"></div>
+                      {{ stats['global']['healthNote'] == 0 ? 0 : (stats['user']['healthNote'] / stats['global']['healthNote'])*100 }}%"></div>
                     <span class="stat">{{ stats['user']['healthNote'] }} / {{ stats['global']['healthNote'] }}</span>
                 </div>
                 <p>Organisation</p>
                 <div class="progress organization">
                     <div class="progress-bar progress-bar-info" style="width:
-                      {{ (stats['user']['organizationNote'] / stats['global']['organizationNote'])*100 }}%"></div>
+                      {{ stats['global']['organizationNote'] == 0 ? 0 : (stats['user']['organizationNote'] / stats['global']['organizationNote'])*100 }}%"></div>
                     <span class="stat">{{ stats['user']['organizationNote'] }} / {{ stats['global']['organizationNote'] }}</span>
                 </div>
                 <p>Notoriété de l'entreprise</p>
                 <div class="progress notoriety">
                     <div class="progress-bar progress-bar-warning" style="width:
-                      {{ (stats['user']['businessNotorietyNote'] / stats['global']['businessNotorietyNote'])*100 }}%"></div>
+                      {{ stats['global']['businessNotorietyNote'] == 0 ? 0 : (stats['user']['businessNotorietyNote'] / stats['global']['businessNotorietyNote'])*100 }}%"></div>
                     <span class="stat">{{ stats['user']['businessNotorietyNote'] }} / {{ stats['global']['businessNotorietyNote'] }}</span>
                 </div>
             </div>

@@ -21,26 +21,26 @@
         <p>Nombre de mini-jeux terminés:</p>
         <div class="progress">
           <div class="progress-bar" style="width:
-            {{ (minigames['finished'] / minigames['total'])*100 }}%"></div>
+            {{ minigames['total'] == 0 ? 0 : (minigames['finished'] / minigames['total'])*100 }}%"></div>
           <span class="stat">{{ minigames['finished'] }} / {{ minigames['total'] }}</span>
         </div>
         <hr>
         <p>Santé</p>
         <div class="progress health">
           <div class="progress-bar progress-bar-success" style="width:
-            {{ (stats['user']['healthNote'] / stats['global']['healthNote'])*100 }}%"></div>
+            {{ stats['global']['healthNote'] == 0 ? 0 : (stats['user']['healthNote'] / stats['global']['healthNote'])*100 }}%"></div>
           <span class="stat">{{ stats['user']['healthNote'] }} / {{ stats['global']['healthNote'] }}</span>
         </div>
         <p>Organisation</p>
         <div class="progress organization">
           <div class="progress-bar progress-bar-info" style="width:
-            {{ (stats['user']['organizationNote'] / stats['global']['organizationNote'])*100 }}%"></div>
+            {{ stats['global']['organizationNote'] == 0 ? 0 : (stats['user']['organizationNote'] / stats['global']['organizationNote'])*100 }}%"></div>
           <span class="stat">{{ stats['user']['organizationNote'] }} / {{ stats['global']['organizationNote'] }}</span>
         </div>
         <p>Notoriété de l'entreprise</p>
         <div class="progress notoriety">
           <div class="progress-bar progress-bar-warning" style="width:
-            {{ (stats['user']['businessNotorietyNote'] / stats['global']['businessNotorietyNote'])*100 }}%"></div>
+            {{ stats['global']['businessNotorietyNote'] == 0 ? 0 : (stats['user']['businessNotorietyNote'] / stats['global']['businessNotorietyNote'])*100 }}%"></div>
           <span class="stat">{{ stats['user']['businessNotorietyNote'] }} / {{ stats['global']['businessNotorietyNote'] }}</span>
         </div>
       </div>
@@ -75,21 +75,21 @@
                 <td class="bar">
                   <div class="progress health">
                     <div class="progress-bar progress-bar-success" style="width:
-                      {{ (attempt.healthNote / attempt.exercise.healthMaxNote)*100 }}%"></div>
+                      {{ attempt.exercise.healthMaxNote == 0 ? 0 : (attempt.healthNote / attempt.exercise.healthMaxNote)*100 }}%"></div>
                     <span class="stat">{{ attempt.healthNote }} / {{ attempt.exercise.healthMaxNote }}</span>
                   </div>
                 </td>
                 <td class="bar">
                   <div class="progress organization">
                     <div class="progress-bar progress-bar-info" style="width:
-                      {{ (attempt.organizationNote / attempt.exercise.organizationMaxNote)*100 }}%"></div>
+                      {{ attempt.exercise.organizationMaxNote == 0 ? 0 : (attempt.organizationNote / attempt.exercise.organizationMaxNote)*100 }}%"></div>
                     <span class="stat">{{ attempt.organizationNote }} / {{ attempt.exercise.organizationMaxNote }}</span>
                   </div>
                 </td>
                 <td class="bar">
                   <div class="progress notoriety">
                     <div class="progress-bar progress-bar-warning" style="width:
-                      {{ (attempt.businessNotorietyNote / attempt.exercise.businessNotorietyMaxNote)*100 }}%"></div>
+                      {{ attempt.exercise.businessNotorietyMaxNote == 0 ? 0 : (attempt.businessNotorietyNote / attempt.exercise.businessNotorietyMaxNote)*100 }}%"></div>
                     <span class="stat">{{ attempt.businessNotorietyNote }} / {{ attempt.exercise.businessNotorietyMaxNote }}</span>
                   </div>
                 </td>

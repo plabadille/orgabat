@@ -11,17 +11,17 @@
                   <p>Résumé :</p>
                   <div class="progress health">
                       <div class="progress-bar progress-bar-success" style="width:
-                        {{ (categStats['user']['healthNote'] / categStats['global']['healthNote'])*100 }}%"></div>
+                        {{ categStats['global']['healthNote'] == 0 ? 0 : (categStats['user']['healthNote'] / categStats['global']['healthNote'])*100 }}%"></div>
                       <span class="stat">{{ categStats['user']['healthNote'] }} / {{ categStats['global']['healthNote'] }}</span>
                   </div>
                   <div class="progress organization">
                       <div class="progress-bar progress-bar-info" style="width:
-                        {{ (categStats['user']['organizationNote'] / categStats['global']['organizationNote'])*100 }}%"></div>
+                        {{ categStats['global']['organizationNote'] == 0 ? 0 : (categStats['user']['organizationNote'] / categStats['global']['organizationNote'])*100 }}%"></div>
                       <span class="stat">{{ categStats['user']['organizationNote'] }} / {{ categStats['global']['organizationNote'] }}</span>
                   </div>
                   <div class="progress notoriety">
                       <div class="progress-bar progress-bar-warning" style="width:
-                        {{ (categStats['user']['businessNotorietyNote'] / categStats['global']['businessNotorietyNote'])*100 }}%"></div>
+                        {{ categStats['global']['businessNotorietyNote'] == 0 ? 0 : (categStats['user']['businessNotorietyNote'] / categStats['global']['businessNotorietyNote'])*100 }}%"></div>
                       <span class="stat">{{ categStats['user']['businessNotorietyNote'] }} / {{ categStats['global']['businessNotorietyNote'] }}</span>
                   </div>
               </div>
@@ -55,34 +55,66 @@
                     {% if exercise.bestExerciseHistory %}
                       <div class="tries">Tentatives: {{ exercise.exerciseHistories|length }}</div>
                       <div class="progress health">
-                          <div class="progress-bar progress-bar-success" style="width:
+                          {% if exercise.healthMaxNote == 0 %}
+                            <div class="progress-bar progress-bar-warning" style="width:
+                            {{ 0 }}%"></div>
+                          {% else %}
+                            <div class="progress-bar progress-bar-warning" style="width:
                             {{ (exercise.bestExerciseHistory.healthNote / exercise.healthMaxNote)*100 }}%"></div>
+                          {% endif %}
                           <span class="stat">{{ exercise.bestExerciseHistory.healthNote }} / {{ exercise.healthMaxNote }}</span>
                       </div>
                       <div class="progress organization">
-                          <div class="progress-bar progress-bar-info" style="width:
+                          {% if exercise.organizationMaxNote == 0 %}
+                            <div class="progress-bar progress-bar-warning" style="width:
+                            {{ 0 }}%"></div>
+                          {% else %}
+                            <div class="progress-bar progress-bar-warning" style="width:
                             {{ (exercise.bestExerciseHistory.organizationNote / exercise.organizationMaxNote)*100 }}%"></div>
+                          {% endif %}
                           <span class="stat">{{ exercise.bestExerciseHistory.organizationNote }} / {{ exercise.organizationMaxNote }}</span>
                       </div>
                       <div class="progress notoriety">
+                          {% if exercise.businessNotorietyMaxNote == 0 %}
+                            <div class="progress-bar progress-bar-warning" style="width:
+                            {{ 0 }}%"></div>
+                          {% else %}
+                            <div class="progress-bar progress-bar-warning" style="width:
+                            {{ (exercise.bestExerciseHistory.businessNotorietyNote / exercise.businessNotorietyMaxNote)*100 }}%"></div>
+                          {% endif %}
                           <div class="progress-bar progress-bar-warning" style="width:
                             {{ (exercise.bestExerciseHistory.businessNotorietyNote / exercise.businessNotorietyMaxNote)*100 }}%"></div>
                           <span class="stat">{{ exercise.bestExerciseHistory.businessNotorietyNote }} / {{ exercise.businessNotorietyMaxNote }}</span>
                       </div>
                     {% else %}
                       <div class="progress health">
-                          <div class="progress-bar progress-bar-success" style="width:
-                            {{ (0 / exercise.healthMaxNote)*100 }}%"></div>
+                          {% if exercise.healthMaxNote == 0 %}
+                            <div class="progress-bar progress-bar-success" style="width:
+                              {{ 0 }}%"></div>
+                          {% else %}
+                            <div class="progress-bar progress-bar-success" style="width:
+                              {{ (0 / exercise.healthMaxNote)*100 }}%"></div>
+                          {% endif %}
                           <span class="stat">{{ 0 }} / {{ exercise.healthMaxNote }}</span>
                       </div>
                       <div class="progress organization">
-                          <div class="progress-bar progress-bar-info" style="width:
-                            {{ (0 / exercise.organizationMaxNote)*100 }}%"></div>
+                          {% if exercise.organizationMaxNote == 0 %}
+                            <div class="progress-bar progress-bar-success" style="width:
+                              {{ 0 }}%"></div>
+                          {% else %}
+                            <div class="progress-bar progress-bar-success" style="width:
+                              {{ (0 / exercise.organizationMaxNote)*100 }}%"></div>
+                          {% endif %}
                           <span class="stat">{{ 0 }} / {{ exercise.organizationMaxNote }}</span>
                       </div>
                       <div class="progress notoriety">
-                          <div class="progress-bar progress-bar-warning" style="width:
-                            {{ (0 / exercise.businessNotorietyMaxNote)*100 }}%"></div>
+                          {% if exercise.businessNotorietyMaxNote == 0 %}
+                            <div class="progress-bar progress-bar-success" style="width:
+                              {{ 0 }}%"></div>
+                          {% else %}
+                            <div class="progress-bar progress-bar-success" style="width:
+                              {{ (0 / exercise.businessNotorietyMaxNote)*100 }}%"></div>
+                          {% endif %}
                           <span class="stat">{{ 0 }} / {{ exercise.businessNotorietyMaxNote }}</span>
                       </div>
                     {% endif %}
