@@ -6,6 +6,9 @@
     {{  form_start(form) }}
     <div class="col-sm-12">{{ form_row(form.firstName) }}</div>
     <div class="col-sm-12">{{ form_row(form.lastName) }}</div>
+    {% if form.username is defined %}
+        <div class="col-sm-12">{{ form_row(form.username) }}</div>
+    {% endif %}
     <div class="col-sm-12">{{ form_row(form.email) }}</div>
     <div class="col-sm-12">
         {% for pwd in form.plainPassword %}

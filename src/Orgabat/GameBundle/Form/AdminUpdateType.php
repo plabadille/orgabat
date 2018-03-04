@@ -29,6 +29,7 @@ class AdminUpdateType extends AbstractType
         $builder
             ->add('firstName', TextType::class, ['label' => 'Prénom'])
             ->add('lastName', TextType::class, ['label' => 'Nom'])
+            ->add('username', TextType::class, ['label' => 'Nom d\'utilisateur'])
             ->add('email', EmailType::class, ['label' => 'Email'])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,

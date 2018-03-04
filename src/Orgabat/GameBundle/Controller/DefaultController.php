@@ -198,7 +198,9 @@ class DefaultController extends Controller
             $user = $form->getData();
 
             // Update username
-            $user->setUsername($user->getFirstName().' '.$user->getLastName());
+            if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+                $user->setUsername($user->getFirstName().' '.$user->getLastName());
+            }
 
             // Update password
             $encoder = $this->get('security.encoder_factory')->getEncoder($user);
