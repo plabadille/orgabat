@@ -12,12 +12,8 @@ class LoadSectionData implements FixtureInterface, OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $data = [
-            'CAP 1',
-            'CAP 2',
-            'BEP 1',
-            'BEP 2',
-            'CAP 3',
-            'BEP 3'
+            'TEST 1',
+            'TEST 2',
         ];
 
         foreach ($data as $value) {
